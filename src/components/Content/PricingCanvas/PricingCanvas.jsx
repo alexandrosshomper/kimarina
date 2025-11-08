@@ -242,23 +242,30 @@ const PricingCanvas = ({ roiCalcAction }) => {
     }
   `;
   const PanelList = styled.div`
-    /* Auto Layout */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: stretch;
     flex-grow: 1;
     margin-bottom: 32px;
-    padding-top: 2px;
+    width: 100%;
+    background-color: ${Colors.back};
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
   `;
 
   const PanelListItem = styled.div`
-    /* Auto Layout */
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 16px;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+    &:last-of-type {
+      border-bottom: none;
+    }
   `;
 
   const PriceBullet = styled.div`

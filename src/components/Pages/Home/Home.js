@@ -799,12 +799,8 @@ const SolutionPictureBig = styled.img`
 
 const PricePanel = styled.div`
   display: flex;
-
-  border-radius: 0.38rem;
-
   margin-bottom: 12px;
   width: 100%;
-
   background-color: ${Colors.back};
 
   ${Devices.tabletS} {
@@ -849,13 +845,17 @@ const PanelContent = styled.div`
   }
 `;
 const PanelBody = styled.div`
-  /* Auto Layout */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  align-items: stretch;
   flex-grow: 1;
   margin-bottom: 32px;
+  width: 100%;
+  background-color: ${Colors.back};
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 `;
 const PanelCopy = styled.p`
   font-weight: 400;
@@ -927,11 +927,16 @@ const PricePanelTitle = styled.div`
   }
 `;
 const PanelListItem = styled.div`
-  /* Auto Layout */
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 8px;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 `;
 
 const PriceBullet = styled.div`
