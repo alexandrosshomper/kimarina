@@ -3,12 +3,12 @@ import styled from "@emotion/styled";
 
 const Wortmarke = (props) => {
   const Wortmarke = styled.img`
-    width: 60.98px;
-    height: 28.44px;
+    width: 140px;
+    height: 32px;
   `;
   const Wrapper = styled.a`
     width: 60.98px;
-    height: 26px;
+    height: 32px;
   `;
 
   return (

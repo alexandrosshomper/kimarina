@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect } from "react";
+import React, { lazy, Suspense, useState, useEffect, useCallback } from "react";
 import Spinner from "react-spinner-material";
 //import React from "react";
 import styled from "@emotion/styled";
@@ -63,6 +63,23 @@ const Navigation = lazy(() => import("./components/Navigation/Navigation"));
 /*const MiniNavigation = lazy(() =>
   import("./components/Navigation/MiniNavigation/MiniNavigation")
 );*/
+const StyledApp = styled.div`
+  text-align: center;
+  margin: 0 auto;
+  ${Devices.tabletS} {
+    //width: 564px;
+  }
+  ${Devices.tabletM} {
+    //width: 708px;
+  }
+  ${Devices.laptopS} {
+    //width: 852px;
+  }
+  ${Devices.laptopM} {
+    //width: 1140px;
+  }
+`;
+
 const renderLoader = () => (
   <div
     style={{
@@ -81,44 +98,24 @@ const renderLoader = () => (
 ReactGA.initialize("G-6BNG13DFW0"); // Replace with your Google Analytics tracking ID
 
 function App() {
-  const App = styled.div`
-    text-align: center;
-    margin: 0 auto;
-    ${Devices.tabletS} {
-      //width: 564px;
-    }
-    ${Devices.tabletM} {
-      //width: 708px;
-    }
-    ${Devices.laptopS} {
-      //width: 852px;
-    }
-    ${Devices.laptopM} {
-      //width: 1140px;
-    }
-  `;
   const [isSticky, setIsSticky] = useState(false);
 
+  const handleScroll = useCallback(() => {
+    setIsSticky(window.pageYOffset > 152);
+  }, []);
+
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
-  const handleScroll = () => {
-    if (window.pageYOffset > 152) {
-      setIsSticky(true);
-    } else {
-      setIsSticky(false);
-    }
-  };
+  }, [handleScroll]);
 
   return (
     <Router>
       <ScrollToTop />
 
-      <App className="App">
+      <StyledApp className="App">
         <Helmet>
           <meta charSet="utf-8" />
           <title>Alexandros Shomper</title>
@@ -181,7 +178,7 @@ function App() {
           </Switch>
           <Footer />
         </Suspense>
-      </App>
+      </StyledApp>
     </Router>
   );
 }

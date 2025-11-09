@@ -5,7 +5,8 @@
     "name": "Asana",
     "desc": "Where work connects",
     "cover": "/img/casestudies/asana/cover.png",
-    "thumbnail": "/img/casestudies/asana/thumbnail.png"
+    "thumbnail": "/img/casestudies/asana/thumbnail.png",
+    "type": "Onboarding Case Studies"
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "name": "Wrike",
     "desc": "Where work connects",
     "cover": "/img/casestudies/wrike/cover.png",
-    "thumbnail": "/img/casestudies/wrike/thumbnail.png"
+    "thumbnail": "/img/casestudies/wrike/thumbnail.png",
+    "type": "Onboarding Case Studies"
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "name": "Linear",
     "desc": "Where work connects",
     "cover": "/img/casestudies/linear/cover.png",
-    "thumbnail": "/img/casestudies/linear/thumbnail.png"
+    "thumbnail": "/img/casestudies/linear/thumbnail.png",
+    "type": "Onboarding Case Studies"
   },
   {
     "id": 4,
@@ -29,6 +32,16 @@
     "name": "Trello",
     "desc": "Where work connects",
     "cover": "/img/casestudies/trello/cover.png",
-    "thumbnail": "/img/casestudies/trello/thumbnail.png"
+    "thumbnail": "/img/casestudies/trello/thumbnail.png",
+    "type": "Onboarding Case Studies"
+  },
+  {
+    "id": 5,
+    "slug": "casestudies/chatgpt-apps",
+    "name": "Booking vacation with ChatGPT Apps",
+    "desc": "Booking vacation with ChatGPT Apps",
+    "cover": "/img/casestudies/chatgpt-apps/cover.png",
+    "thumbnail": "/img/casestudies/chatgpt-apps/thumbnail.png",
+    "type": "General Case Study"
   }
 ]

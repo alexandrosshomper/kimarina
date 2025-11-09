@@ -41,19 +41,6 @@ const ListPolaroid = ({
   const PanelContent = styled.div`
     text-align: left;
     padding: 0px 0px 0px 0px;
-
-    ${mq[0]} {
-      padding: 0px 0px 0px 0px;
-    }
-    ${mq[1]} {
-      padding: 0px 0px 0px 0px;
-    }
-    ${mq[2]} {
-      padding: 0px 0px 0px 0px;
-    }
-    ${mq[3]} {
-      padding: 0px 0px 0px 0px;
-    }
   `;
 
   return (
