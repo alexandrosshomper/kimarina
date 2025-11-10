@@ -34,15 +34,25 @@ jobs:
           echo "${{ secrets.SFTP_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
+      - name: Deploy shared root config (.htaccess & robots)
+        uses: burnett01/rsync-deployments@7.1.0
+        with:
+          switches: -avzr --include='.htaccess' --include='robots*.txt' --exclude='*'
+          path: ./
+          remote_path: ${{ secrets.FTP_ROOT_PATH }}
+          remote_host: ${{ secrets.FTP_SERVER }}
+          remote_user: ${{ secrets.FTP_USER }}
+          remote_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+
       - name: Deploy on STAGE via rsync over SSH
         if: github.ref == 'refs/heads/staging'
         uses: burnett01/rsync-deployments@7.1.0
         with:
           switches: -avzr --delete --exclude='.htpasswd' # mirror contents; remove stale files inside target
           path: build/ # trailing slash = CONTENTS of build/
-          remote_path: /home/cq0uhrusz_ssh/webroots/75c309a3/stage/
-          remote_host: ${{ secrets.FTP_SERVER }} # ssh.kimarina.com
-          remote_user: ${{ secrets.FTP_USER }} # kimarina.com
+          remote_path: ${{ secrets.FTP_STAGE_PATH }}
+          remote_host: ${{ secrets.FTP_SERVER }} # ssh.cq0uhrusz.service.one
+          remote_user: ${{ secrets.FTP_USER }} # cq0uhrusz_ssh
           remote_key: ${{ secrets.SFTP_PRIVATE_KEY }} # gha_deploy_ed25519 (no passphrase)
       - name: Re-apply staging auth & overrides
         if: ${{ github.ref_name == 'staging' }}
@@ -50,7 +60,7 @@ jobs:
         with:
           switches: -avzr # NOTE: no --delete here
           path: stage-public/ # copy supporting files like .htaccess & .htpasswd
-          remote_path: /home/cq0uhrusz_ssh/webroots/75c309a3/stage/
+          remote_path: ${{ secrets.FTP_STAGE_PATH }}
           remote_host: ${{ secrets.FTP_SERVER }}
           remote_user: ${{ secrets.FTP_USER }}
           remote_key: ${{ secrets.SFTP_PRIVATE_KEY }}
@@ -60,7 +70,18 @@ jobs:
         with:
           switches: -avzr --delete # mirror contents; remove stale files inside target
           path: build/ # trailing slash = CONTENTS of build/
-          remote_path: /home/cq0uhrusz_ssh/webroots/75c309a3/production/
-          remote_host: ${{ secrets.FTP_SERVER }} # ssh.kimarina.com
-          remote_user: ${{ secrets.FTP_USER }} # kimarina.com
+          remote_path: ${{ secrets.FTP_PRODUCTION_PATH }}
+          remote_host: ${{ secrets.FTP_SERVER }} # ssh.cq0uhrusz.service.one
+          remote_user: ${{ secrets.FTP_USER }} # cq0uhrusz_ssh
           remote_key: ${{ secrets.SFTP_PRIVATE_KEY }} # gha_deploy_ed25519 (no passphrase)
+
+      - name: Re-apply production overrides
+        if: github.ref == 'refs/heads/master'
+        uses: burnett01/rsync-deployments@7.1.0
+        with:
+          switches: -avzr # NOTE: no --delete here
+          path: production-public/
+          remote_path: ${{ secrets.FTP_PRODUCTION_PATH }}
+          remote_host: ${{ secrets.FTP_SERVER }}
+          remote_user: ${{ secrets.FTP_USER }}
+          remote_key: ${{ secrets.SFTP_PRIVATE_KEY }}

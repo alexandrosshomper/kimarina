@@ -10,7 +10,7 @@ const app = express();
 app.get("/sitemap.xml", async (req, res) => {
   try {
     const sitemap = new SitemapStream({
-      hostname: "https://www.alexandrosshomper.de",
+      hostname: "https://www.kimarina.com",
     });
 
     // Add all routes to the sitemap
