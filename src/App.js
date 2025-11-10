@@ -118,7 +118,7 @@ function App() {
       <StyledApp className="App">
         <Helmet>
           <meta charSet="utf-8" />
-          <title>Alexandros Shomper</title>
+          <title>Kimarina - Product & Growth Design</title>
           <meta
             name="description"
             content="Experienced in core and growth initiatives from acquisition to retention & engagement. Bridging business, design, and tech to create awesome solutions people love."
