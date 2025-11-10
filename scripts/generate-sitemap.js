@@ -6,7 +6,7 @@ const routes = require("../src/routes");
 async function generateSitemap() {
   try {
     const sitemap = new SitemapStream({
-      hostname: "https://www.alexandrosshomper.de",
+      hostname: "https://www.kimarina.com",
     });
 
     // Add all routes to the sitemap

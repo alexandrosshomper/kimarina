@@ -1,23 +1,30 @@
 # /.htaccess at web root
-
 RewriteEngine On
 
-# Host-aware robots
-SetEnvIfNoCase Host "^stage\.alexandrosshomper\.de$" BOTBLOCK=1
+# 0) Redirect production subdomain to apex (preserves path/query)
+RewriteCond %{HTTP_HOST} ^production\.kimarina\.com$ [NC]
+RewriteRule ^ https://kimarina.com%{REQUEST_URI} [R=301,L]
+
+# 1) Host-aware robots (block only STAGE)
+SetEnvIfNoCase Host "^stage\.kimarina\.com$" BOTBLOCK=1
+
+# Serve different robots.txt per host
 RewriteCond %{ENV:BOTBLOCK} =1
 RewriteRule ^robots\.txt$ /robots-block.txt [L]
 RewriteCond %{ENV:BOTBLOCK} !=1
 RewriteRule ^robots\.txt$ /robots-allow.txt [L]
+
+# Add strong noindex header for stage
 <IfModule mod_headers.c>
   Header always set X-Robots-Tag "noindex, nofollow, noarchive" env=BOTBLOCK
 </IfModule>
 
-# Force HTTPS for all hosts
+# 2) Force HTTPS for ALL hosts
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-# Route ONLY the main domain to /production
+# 3) Route only the main domain to /production (not stage)
 RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/ [NC]
 RewriteCond %{REQUEST_URI} !^/production/ [NC]
-RewriteCond %{HTTP_HOST} ^(www\.)?alexandrosshomper\.de$ [NC]
+RewriteCond %{HTTP_HOST} ^(www\.)?kimarina\.com$ [NC]
 RewriteRule ^(.*)$ /production/$1 [L]

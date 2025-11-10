@@ -1,12 +1,7 @@
 # --- Basic Auth (staging only) ---
-
-# --- Basic Auth (staging only) ---
-
 AuthType Basic
 AuthName "Staging Private"
-AuthName "Staging Private"
-AuthName "Staging Private"
-AuthUserFile /customers/3/6/f/alexandrosshomper.de/httpd.www/stage/.htpasswd
+AuthUserFile /home/cq0uhrusz_ssh/webroots/75c309a3/stage/.htpasswd
 Require valid-user
 
 <Files ".htpasswd">
@@ -14,30 +9,21 @@ Require all denied
 </Files>
 
 # --- Serve index by default & SPA fallback ---
-
-DirectoryIndex index.html
-
-# --- Serve index by default & SPA fallback ---
-
 DirectoryIndex index.html
 Options -MultiViews
 RewriteEngine On
 
 # 1) NEVER rewrite static assets (serve as-is even if -f check misbehaves)
-
-# Add other prefixes you use (assets/, \_next/, etc.) if needed
-
-RewriteRule ^(static/|assets/|\_next/) - [L]
+# Add other prefixes you use (assets/, _next/, etc.) if needed
+RewriteRule ^(static/|assets/|_next/) - [L]
 RewriteRule ^favicon\.ico$ - [L]
 RewriteRule ^manifest\.json$ - [L]
 RewriteRule ^logo(192|512)\.png$ - [L]
 
 # 2) If the requested path exists as file/dir -> serve it
-
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule . - [L]
 
 # 3) Everything else -> SPA fallback
-
 RewriteRule ^ index.html [QSA,L]
