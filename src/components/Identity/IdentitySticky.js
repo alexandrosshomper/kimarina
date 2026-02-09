@@ -27,10 +27,10 @@ const Identity = (props) => {
   `;
   const Logo = styled.div`
     width: 32px;
-    height: 32px;
+    height: 31px;
     background-image: url("/img/Identity/Logo/Logo@2x.png");
     background-size: contain;
-    border-radius: 30px;
+
   `;
 
   return (
